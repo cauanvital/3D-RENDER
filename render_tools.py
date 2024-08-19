@@ -60,7 +60,7 @@ def draw_edges(app, edges, vertices):
             app.EDGE_COLOR,
             (vertices[x1][0], vertices[x1][1]),
             (vertices[x2][0], vertices[x2][1]),
-            5
+            1
         )
         
 def draw_faces(app, faces, vertices):
