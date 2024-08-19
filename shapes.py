@@ -3,20 +3,28 @@ from center_shape import *
 
 cube = {
     'vertices': [
-        np.array([-1,-1,1]),
-        np.array([1,-1,1]),
-        np.array([1,1,1]),
-        np.array([-1,1,1]),
+        np.array([-10,-10,10]),
+        np.array([10,-10,10]),
+        np.array([10,10,10]),
+        np.array([-10,10,10]),
         
-        np.array([-1,-1,-1]),
-        np.array([1,-1,-1]),
-        np.array([1,1,-1]),
-        np.array([-1,1,-1])
+        np.array([-10,-10,-10]),
+        np.array([10,-10,-10]),
+        np.array([10,10,-10]),
+        np.array([-10,10,-10])
     ],
     'edges': [
         (0, 1), (1, 2), (2, 3), (3, 0),
         (7, 6), (6, 5), (5, 4), (4, 7),
         (0, 4), (1, 5), (2, 6), (3, 7)
+    ],
+    'faces': [
+        np.array([0, 1, 2, 3]),
+        np.array([0, 4, 5, 1]),
+        np.array([1, 5, 6, 2]),
+        np.array([2, 6, 7, 3]),
+        np.array([3, 7, 4, 0]),
+        np.array([4, 5, 6, 7])
     ]
 }
 

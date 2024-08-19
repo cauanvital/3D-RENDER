@@ -56,5 +56,14 @@ def draw_edges(app, edges, vertices):
             app.EDGE_COLOR,
             (vertices[x1][0], vertices[x1][1]),
             (vertices[x2][0], vertices[x2][1]),
-            1
+            5
         )
+        
+def draw_faces(app, faces, vertices):
+    for face in faces:
+        face_vertices = []
+        
+        for i in face:
+            face_vertices.append(np.array([vertices[i][0], vertices[i][1]]))
+                                 
+        pygame.draw.polygon(app.screen, app.FACE_COLOR, face_vertices)

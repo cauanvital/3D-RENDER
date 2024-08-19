@@ -4,7 +4,7 @@ from math import *
 from shapes import *
 from render_tools import *
 
-shape = mario
+shape = cube
 #shape['vertices'] = rotate(shape['vertices'], 1.6, 0)
 
 
@@ -42,13 +42,13 @@ class RenderApp:
                         
             rotated_shape = rotate(rotate(shape['vertices'], angle, 1), angle, 0)
             projected_shape = project_matrix(rotated_shape)
-            rescale_shape = rescale([self.SCALE, self.WIDTH, self.HEIGHT], projected_shape)
+            rescaled_shape = rescale([self.SCALE, self.WIDTH, self.HEIGHT], projected_shape)
             
-            for v in rescale_shape:
+            for v in rescaled_shape:
                 pygame.draw.circle(self.screen, self.VERTICE_COLOR, v, 1)
-            draw_edges(self, shape['edges'], rescale_shape)
-                
-                
+            draw_edges(self, shape['edges'], rescaled_shape)
+            draw_faces(self, shape['faces'], rescaled_shape)
+            
             pygame.display.update()
             
             angle += 0.01
