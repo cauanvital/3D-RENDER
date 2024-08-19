@@ -12,13 +12,13 @@ class RenderApp:
     def __init__(self):
         pygame.display.set_caption('3D RENDER')
         
-        self.RESOLUTION = self.WIDTH, self.HEIGHT = 800, 600
+        self.RESOLUTION = self.WIDTH, self.HEIGHT = 1200, 800
         self.BG_COLOR = (49, 79, 79)
         
         self.VERTICE_COLOR = (255, 0, 0)
         self.EDGE_COLOR = (255, 255, 255)
         self.FACE_COLOR = (100, 100, 100)
-        self.SCALE = 6
+        self.SCALE = 10
         
         self.screen = pygame.display.set_mode(self.RESOLUTION)
         self.clock = pygame.time.Clock()
