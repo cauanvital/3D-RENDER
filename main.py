@@ -5,7 +5,7 @@ from shapes import *
 from render_tools import *
 
 shape = mario
-shape['vertices'] = rotate(shape['vertices'], 90, 0)
+#shape['vertices'] = rotate(shape['vertices'], 1.6, 0)
 
 
 class RenderApp:
