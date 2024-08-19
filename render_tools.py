@@ -47,6 +47,10 @@ def rescale(scales, vertices):
     
     return rescaled_shape
 
+def draw_vertices(app, vertices):
+    for vertex in vertices:
+        pygame.draw.circle(app.screen, app.VERTICE_COLOR, vertex, 1)
+
 def draw_edges(app, edges, vertices):
     for edge in edges:
         x1 = edge[0]
