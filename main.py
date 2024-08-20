@@ -5,7 +5,7 @@ from math import *
 from shapes import *
 from render_tools import *
 
-shape = mario
+shape = cube
 
 
 class RenderApp:
@@ -18,7 +18,7 @@ class RenderApp:
         
         self.VERTICE_COLOR = (255, 0, 0)
         self.EDGE_COLOR = (255, 255, 255)
-        self.FACE_COLOR = (100, 100, 100)
+        self.FACE_COLORS = [(130, 130, 130),(120, 120, 120),(110, 110, 110),(100, 100, 100),(90, 90, 90),(80, 80, 80)]
         self.SCALE = 10
         
         self.screen = pygame.display.set_mode(self.RESOLUTION)
@@ -32,6 +32,8 @@ class RenderApp:
         angle_y = 0
         angle_z = 0
         
+        center = None
+        
         while True:
             self.clock.tick(60)
             self.screen.fill(self.BG_COLOR)
@@ -43,13 +45,14 @@ class RenderApp:
                     
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     mouse_is_pressed = True
-                    pygame.mouse.set_pos(self.CENTER_CORDS)
+                    if center == None:
+                        center = pygame.mouse.get_pos()
                 if event.type == pygame.MOUSEBUTTONUP:
                     mouse_is_pressed = False
             if mouse_is_pressed:
                 xy = pygame.mouse.get_pos()
-                x = xy[0] - self.CENTER_CORDS[0]
-                y = xy[1] - self.CENTER_CORDS[1]
+                x = (xy[1] - center[1]) * -1
+                y = (xy[0] - center[0]) * -1
                 angle_x = x * 0.01
                 angle_y = y * 0.01
             self.display(angle_x, angle_y, angle_z)
@@ -64,7 +67,7 @@ class RenderApp:
                     
         draw_vertices(self, rescaled_vertices)
         draw_edges(self, shape['edges'], rescaled_vertices)
-        draw_faces(self, shape['faces'], rescaled_vertices)
+        draw_faces(self, shape['faces'], rescaled_vertices, rotated_vertices)
 
     
 if __name__ == '__main__':

@@ -63,11 +63,33 @@ def draw_edges(app, edges, vertices):
             1
         )
         
-def draw_faces(app, faces, vertices):
-    for face in faces:
+def draw_faces(app, faces:list, projected:list, rotated:list):
+    color = 0
+    max_z_pos = max([i[2] for i in rotated])
+    greater_vertex = 0
+    
+    for i,arr in enumerate(rotated):
+        if arr[2] == max_z_pos:
+            greater_vertex = i
+            break
+    
+    first_faces = [arr for arr in faces if greater_vertex not in arr]
+    last_faces = [arr for arr in faces if greater_vertex in arr]
+    
+    for face in first_faces:
         face_vertices = []
         
         for i in face:
-            face_vertices.append(np.array([vertices[i][0], vertices[i][1]]))
+            face_vertices.append(np.array([projected[i][0], projected[i][1]]))
                                  
-        pygame.draw.polygon(app.screen, app.FACE_COLOR, face_vertices)
+        pygame.draw.polygon(app.screen, app.FACE_COLORS[color], face_vertices)
+        color += 1
+        
+    for face in last_faces:
+        face_vertices = []
+        
+        for i in face:
+            face_vertices.append(np.array([projected[i][0], projected[i][1]]))
+                                 
+        pygame.draw.polygon(app.screen, app.FACE_COLORS[color], face_vertices)
+        color += 1
