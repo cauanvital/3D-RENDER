@@ -64,30 +64,21 @@ def draw_edges(app, edges, vertices):
         )
         
 def draw_faces(app, faces:list, projected:list, rotated:list):
-    color = 0
-    max_z_pos = max([i[2] for i in rotated])
-    greater_vertex = 0
+    z_pos_dict = {i:j for i,j in enumerate([i[2] for i in rotated])}
+    sorted_z_pos = list(dict(sorted(z_pos_dict.items(), key=lambda x: x[1])).keys())
+    ordered_faces = []
     
-    for i,arr in enumerate(rotated):
-        if arr[2] == max_z_pos:
-            greater_vertex = i
-            break
+    for z in sorted_z_pos:
+        if 'z_pos_list' not in locals(): z_pos_list = []
+        for face in faces:
+            if z in face and [i for i in z_pos_list if i in face]: ordered_faces.append(face)
+        
+        z_pos_list.append(z)
     
-    first_faces = [arr for arr in faces if greater_vertex not in arr]
-    last_faces = [arr for arr in faces if greater_vertex in arr]
-    
-    for face in first_faces:
+    for face in ordered_faces:
         face_vertices = []
-        
-        for i in face:
-            face_vertices.append(np.array([projected[i][0], projected[i][1]]))
-                                 
-        pygame.draw.polygon(app.screen, app.FACE_COLORS[color], face_vertices)
-        color += 1
-        
-    for face in last_faces:
-        face_vertices = []
-        
+        if 'color' not in locals() or color == 6: color = 0
+            
         for i in face:
             face_vertices.append(np.array([projected[i][0], projected[i][1]]))
                                  

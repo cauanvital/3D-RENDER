@@ -5,7 +5,7 @@ from math import *
 from shapes import *
 from render_tools import *
 
-shape = cube
+shape = mario
 
 
 class RenderApp:

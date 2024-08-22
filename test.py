@@ -1,6 +1,12 @@
 import numpy as np
 from shapes import *
 
-rotated = {i:cube['vertices'][i] for i in range(len(cube['vertices']))}
-rotated = {i:j for i,j in sorted(rotated.items(), key=lambda x: x[1][2], reverse=True)}
-print(rotated)
+
+z_pos_dict = {i:j for i,j in enumerate([i[2] for i in mario['vertices']])}
+sorted_z_pos = dict(sorted(z_pos_dict.items(), key=lambda x: x[1], reverse=True))
+
+for index in sorted_z_pos.keys():
+    ...
+
+if [1,2,5]:
+    print(sorted_z_pos)
