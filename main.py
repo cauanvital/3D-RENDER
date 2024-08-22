@@ -5,7 +5,7 @@ from math import *
 from shapes import *
 from render_tools import *
 
-shape = mario
+shape = pyramid_quad_base
 
 
 class RenderApp:
@@ -66,7 +66,7 @@ class RenderApp:
         rescaled_vertices = rescale([self.SCALE, self.WIDTH, self.HEIGHT], projected_vertices)
                     
         draw_vertices(self, rescaled_vertices)
-        draw_edges(self, shape['edges'], rescaled_vertices)
+        #draw_edges(self, shape['edges'], rescaled_vertices)
         draw_faces(self, shape['faces'], rescaled_vertices, rotated_vertices)
 
     

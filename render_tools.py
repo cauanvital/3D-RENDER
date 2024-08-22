@@ -64,8 +64,8 @@ def draw_edges(app, edges, vertices):
         )
         
 def draw_faces(app, faces:list, projected:list, rotated:list):
-    z_pos_dict = {i:j for i,j in enumerate([i[2] for i in rotated])}
-    sorted_z_pos = list(dict(sorted(z_pos_dict.items(), key=lambda x: x[1])).keys())
+    z_pos_dict = [(sum([rotated[i][2] for i in face]), face) for face in faces]
+    sorted_z_pos = list(sorted(z_pos_dict.items(), key=lambda x: x[1]))
     ordered_faces = []
     
     for z in sorted_z_pos:
