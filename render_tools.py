@@ -64,23 +64,32 @@ def draw_edges(app, edges, vertices):
         )
         
 def draw_faces(app, faces:list, projected:list, rotated:list):
-    z_pos_dict = [(sum([rotated[i][2] for i in face]), face) for face in faces]
-    sorted_z_pos = list(sorted(z_pos_dict.items(), key=lambda x: x[1]))
-    ordered_faces = []
+    sorted_faces = [(sum([rotated[i][2] for i in face[0]]), face) for face in faces]
+    sorted_faces.sort(key=lambda x: x[0])
     
-    for z in sorted_z_pos:
-        if 'z_pos_list' not in locals(): z_pos_list = []
-        for face in faces:
-            if z in face and [i for i in z_pos_list if i in face]: ordered_faces.append(face)
-        
-        z_pos_list.append(z)
-    
-    for face in ordered_faces:
+    for face in sorted_faces:
         face_vertices = []
-        if 'color' not in locals() or color == 6: color = 0
             
-        for i in face:
+        for i in face[1][0]:
             face_vertices.append(np.array([projected[i][0], projected[i][1]]))
                                  
-        pygame.draw.polygon(app.screen, app.FACE_COLORS[color], face_vertices)
-        color += 1
+        pygame.draw.polygon(app.screen, face[1][1], face_vertices)
+        
+
+def center_shape(vertices):
+    centered = []
+    
+    c_x = sum([i[0] for i in vertices]) / len(vertices)
+    c_y = sum([i[1] for i in vertices]) / len(vertices)
+    c_z = sum([i[2] for i in vertices]) / len(vertices)
+    
+    for vertex in vertices:
+        c_vertex = [
+            vertex[0] - c_x,
+            vertex[1] - c_y,
+            vertex[2] - c_z
+        ]
+        
+        centered.append(c_vertex)
+    
+    return np.array(centered)
